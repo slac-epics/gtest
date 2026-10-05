@@ -7,7 +7,7 @@
 /html/
 /include/
 /templates/
-/configure/*.local
+#/configure/*.local
 envPaths
 
 # EPICS installation dirs in *Top

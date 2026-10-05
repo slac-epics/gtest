@@ -1,5 +1,7 @@
 # CONFIG_SITE
 
+-include $(SUPPORT)/configure/CONFIG_SITE
+
 # Make any application-specific changes to the EPICS build
 #   configuration variables in this file.
 #
@@ -19,21 +21,16 @@ CHECK_RELEASE = YES
 # Set this when you only want to compile this application
 #   for a subset of the cross-compiled target architectures
 #   that Base is built for.
-#CROSS_COMPILER_TARGET_ARCHS = vxWorks-ppc32
+CROSS_COMPILER_TARGET_ARCHS =
 
 # To install files into a location other than $(TOP) define
 #   INSTALL_LOCATION here.
 #INSTALL_LOCATION=</absolute/path/to/install/top>
 
-# Set this when the IOC and build host use different paths
-#   to the install location. This may be needed to boot from
-#   a Microsoft FTP server say, or on some NFS configurations.
-#IOCS_APPL_TOP = </IOC's/absolute/path/to/install/top>
+# To build the IOC application set BUILD_IOCS to YES
+# Otherwise set it to NO
+BUILD_IOCS=NO
 
-# For application debugging purposes, override the HOST_OPT and/
-#   or CROSS_OPT settings from base/configure/CONFIG_SITE
-#HOST_OPT = NO
-#CROSS_OPT = NO
 
 # Important on Windows / Visual Studio:
 # If DLL builds are configured (SHARED=YES/STATIC=NO),
@@ -41,6 +38,14 @@ CHECK_RELEASE = YES
 # to make sure compilation flags are consistent between
 # all libraries involved.
 SHARED_LIBRARIES = NO
+
+# Set this when the IOC and build host use different paths
+#   to the install location. This may be needed to boot from
+#   a Microsoft FTP server say, or on some NFS configurations.
+#IOCS_APPL_TOP = </IOC's/absolute/path/to/install/top>
+ifdef T_A
+PKG_ARCH=$(T_A)
+endif
 
 # Provide GTEST settings for the module itself
 GTEST = $(INSTALL_LOCATION)
